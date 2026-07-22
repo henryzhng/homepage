@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Henry Zhang</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/favicon-32.png"
+    />
+    <link rel="apple-touch-icon" href="assets/favicon-180.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Schoolbell&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --font-body: "Schoolbell", system-ui, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: #fff;
+        color: #000;
+        font-family: var(--font-body);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2.5px;
+        text-decoration-color: oklch(0.78 0.02 265);
+        transition:
+          text-decoration-color 0.25s ease,
+          color 0.25s ease;
+      }
+      a:hover {
+        text-decoration-color: oklch(0.46 0.02 265);
+        color: oklch(0.24 0.012 265);
+      }
+
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(9px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      #page {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 120px 40px 80px;
+        animation: fadeIn 0.8s ease both;
+      }
+      #row {
+        display: flex;
+        align-items: stretch;
+        gap: 86px;
+        width: fit-content;
+        max-width: 100%;
+      }
+
+      nav {
+        width: max-content;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+        align-items: flex-end;
+        padding-top: 2px;
+        position: sticky;
+        top: 48px;
+        align-self: flex-start;
+      }
+      nav button {
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        display: block;
+        text-align: right;
+        font-family: "Schoolbell", system-ui, sans-serif;
+        /* font-style: italic; */
+        font-size: 22px;
+        line-height: 1.1;
+        letter-spacing: 0.2px;
+        font-weight: 400;
+        color: oklch(0.72 0.02 265);
+        transition: color 0.3s ease;
+      }
+      nav button:hover {
+        color: oklch(0.3 0.012 265);
+      }
+      nav button[aria-current="true"] {
+        font-weight: 500;
+        color: oklch(0.28 0.012 265);
+      }
+
+      /* #divider {
+        width: 1px;
+        background: oklch(0.905 0.006 265);
+        flex-shrink: 0;
+        align-self: stretch;
+        min-height: 360px;
+      } */
+
+      #content {
+        width: 600px;
+        max-width: 100%;
+        font-size: 19px;
+        line-height: 1.72;
+      }
+      #content section {
+        animation: rise 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+      }
+      #content section[hidden] {
+        display: none;
+      }
+      h1 {
+        font-family: var(--font-body);
+        font-weight: 500;
+        font-size: 19px;
+        margin: 0 0 34px;
+        color: #000;
+        letter-spacing: 0.2px;
+      }
+      .about p {
+        margin: 0 0 26px;
+      }
+      .about p:last-child {
+        margin: 0;
+      }
+
+      /* .word {
+        color: oklch(0.5 0.11 250);
+        text-decoration: underline;
+        text-decoration-color: oklch(0.6 0.1 250);
+        text-decoration-thickness: 1.5px;
+        text-underline-offset: 2.5px;
+        cursor: pointer;
+      } */
+
+      .word {
+        color: inherit;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2.5px;
+        text-decoration-color: oklch(0.78 0.02 265);
+        transition:
+          text-decoration-color 0.25s ease,
+          color 0.25s ease;
+        cursor: pointer;
+      }
+      .word:hover {
+        text-decoration-color: oklch(0.46 0.02 265);
+        color: oklch(0.24 0.012 265);
+      }
+
+      .projects {
+        display: flex;
+        flex-direction: column;
+        gap: 34px;
+      }
+      .project {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .project-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 24px;
+      }
+      .project-title {
+        display: flex;
+        align-items: baseline;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .project-title > p:first-child {
+        color: oklch(0.26 0.012 265);
+        font-size: 19px;
+      }
+      .project-title .meta {
+        font-size: 13px;
+        color: oklch(0.6 0.02 265);
+        text-decoration-color: oklch(0.82 0.02 265);
+        text-underline-offset: 2.5px;
+      }
+      .year {
+        color: oklch(0.7 0.02 265);
+        font-size: 15px;
+        flex-shrink: 0;
+      }
+      .project p {
+        margin: 0;
+        color: oklch(0.5 0.015 265);
+        font-size: 16px;
+        line-height: 1.55;
+      }
+      .shot {
+        margin-top: 2px;
+      }
+      .shot img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* Cursor-following image popups. Replace the inner div with an <img> for a real photo. */
+      .popup {
+        position: fixed;
+        z-index: 80;
+        pointer-events: none;
+        opacity: 0;
+        transform: translateY(3px);
+        transition:
+          opacity 0.13s ease,
+          transform 0.13s ease;
+      }
+      .popup.on {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .popup img {
+        display: block;
+        width: min(240px, 70vw);
+        height: auto;
+        border-radius: 4px;
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.32);
+      }
+
+      /* Tablets: tighten the nav↔content gap to save horizontal space. */
+      @media (min-width: 641px) and (max-width: 1024px) {
+        #row {
+          gap: 48px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        #page {
+          padding: 52px 22px 64px;
+          align-items: stretch;
+        }
+        #row {
+          flex-direction: column;
+          gap: 24px;
+          align-items: stretch;
+        }
+        nav {
+          width: auto;
+          flex-direction: row;
+          gap: 22px;
+          align-items: center;
+          justify-content: flex-start;
+          padding-top: 0;
+          position: static;
+        }
+        /* #divider {
+          display: none;
+        } */
+        #content {
+          max-width: 100%;
+          font-size: 17px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="page">
+      <div id="row">
+        <nav>
+          <button data-section="about" aria-current="true">about</button>
+          <button data-section="projects">projects</button>
+        </nav>
+
+        <div id="content">
+          <section class="about" data-section="about">
+            <!-- <h1>Henry Zhang</h1> -->
+            <p>
+              Hi, I'm Henry! I'm currently a Rabi Fellow @ Columbia, studying
+              math and CS, and an MLE @ Triangle Analytics.
+            </p>
+            <p>
+              Much of my work is in machine learning, big data, and quantum
+              computing. Much of my free time is spent with
+              <span class="word" data-img="assets/bear.jpg">my dog, Bear</span>,
+              exploring the outdoors, or poorly playing pickup basketball.
+            </p>
+            <p>
+              You can learn more about me via my
+              <a href="#" data-goto="projects">projects</a>,
+              <a
+                href="https://linkedin.com/henryzhng"
+                target="_blank"
+                rel="noreferrer"
+                >LinkedIn</a
+              >, and, of course,
+              <a
+                href="https://beliapp.co/app/henryzhng"
+                target="_blank"
+                rel="noreferrer"
+                >Beli</a
+              >.
+            </p>
+          </section>
+
+          <section class="projects-section" data-section="projects" hidden>
+            <!-- <h1>Projects</h1> -->
+            <div class="projects">
+              <div class="project">
+                <div class="project-head">
+                  <div class="project-title">
+                    <p>Information Geometry of Expressive QNNs</p>
+                    <!-- <a
+                      class="meta"
+                      href="https://github.com"
+                      target="_blank"
+                      rel="noreferrer"
+                      >GitHub</a
+                    >
+                    <a class="meta" href="#" target="_blank" rel="noreferrer"
+                      >Paper</a
+                    > -->
+                  </div>
+                  <span class="year">2026</span>
+                </div>
+                <p>
+                  Explaining how quantum neural networks in the expressive
+                  (design) regime behave by characterizing their quantum Fisher
+                  information matricies.
+                </p>
+                <div class="shot">
+                  <img
+                    src="assets/qfim_heatmap.png"
+                    alt="Quantum Fisher information matrix heatmap"
+                  />
+                </div>
+              </div>
+              <div class="project">
+                <div class="project-head">
+                  <div class="project-title">
+                    <p>Quantum Hilbert Transform</p>
+                    <a
+                      class="meta"
+                      href="https://github.com/henryzhng/quantum-hilbert-transform"
+                      target="_blank"
+                      rel="noreferrer"
+                      >GitHub</a
+                    >
+                    <a
+                      class="meta"
+                      href="https://doi.org/10.1109/LSP.2026.3654893"
+                      target="_blank"
+                      rel="noreferrer"
+                      >Paper</a
+                    >
+                  </div>
+                  <span class="year">2025</span>
+                </div>
+                <p>
+                  Quantum circuits for efficiently performing multidimensional
+                  Hilbert transforms, based on the convolution theorem.
+                </p>
+                <div class="shot">
+                  <img
+                    src="assets/quantikz_qht.png"
+                    alt="Circuit diagram for the quantum Hilbert transform"
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="popup" id="popup">
+        <img id="popup-img" alt="" />
+      </div>
+    </div>
+
+    <script>
+      // section switching
+      const buttons = document.querySelectorAll("nav button");
+      const sections = document.querySelectorAll("#content section");
+      const names = new Set(Array.from(sections, (s) => s.dataset.section));
+      function show(name) {
+        buttons.forEach((b) =>
+          b.setAttribute(
+            "aria-current",
+            b.dataset.section === name ? "true" : "false",
+          ),
+        );
+        sections.forEach((s) => {
+          const on = s.dataset.section === name;
+          s.hidden = !on;
+          if (on) {
+            s.style.animation = "none";
+            void s.offsetWidth;
+            s.style.animation = "";
+          }
+        });
+        // remember the current section so a reload stays here
+        if (location.hash.slice(1) !== name) {
+          history.replaceState(null, "", "#" + name);
+        }
+      }
+      buttons.forEach((b) =>
+        b.addEventListener("click", () => show(b.dataset.section)),
+      );
+      document.querySelectorAll("[data-goto]").forEach((a) =>
+        a.addEventListener("click", (e) => {
+          e.preventDefault();
+          show(a.dataset.goto);
+        }),
+      );
+
+      // restore the section from the URL on load, and follow back/forward
+      const initial = location.hash.slice(1);
+      if (names.has(initial)) show(initial);
+      window.addEventListener("hashchange", () => {
+        const name = location.hash.slice(1);
+        if (names.has(name)) show(name);
+      });
+
+      // cursor-following image popups (hover on desktop, tap-to-toggle on touch)
+      const popup = document.getElementById("popup");
+      const popupImg = document.getElementById("popup-img");
+      const canHover = window.matchMedia("(hover: hover)").matches;
+
+      // keep the popup fully inside the viewport
+      function place(x, y) {
+        const w = popup.offsetWidth || 240;
+        const h = popup.offsetHeight || 160;
+        const left = Math.min(x + 16, window.innerWidth - w - 8);
+        const top = Math.min(y + 16, window.innerHeight - h - 8);
+        popup.style.left = Math.max(8, left) + "px";
+        popup.style.top = Math.max(8, top) + "px";
+      }
+
+      document.querySelectorAll(".word").forEach((word) => {
+        if (canHover) {
+          word.addEventListener("mouseenter", () => {
+            popupImg.src = word.dataset.img;
+            popup.classList.add("on");
+          });
+          word.addEventListener("mouseleave", () =>
+            popup.classList.remove("on"),
+          );
+          word.addEventListener("mousemove", (e) =>
+            place(e.clientX, e.clientY),
+          );
+        } else {
+          word.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const isOpen =
+              popup.classList.contains("on") &&
+              popupImg.src.endsWith(word.dataset.img);
+            if (isOpen) {
+              popup.classList.remove("on");
+              return;
+            }
+            popupImg.src = word.dataset.img;
+            popup.classList.add("on");
+            const r = word.getBoundingClientRect();
+            place(r.left, r.bottom);
+          });
+        }
+      });
+
+      // tap anywhere else to dismiss the popup on touch
+      if (!canHover) {
+        document.addEventListener("click", () => popup.classList.remove("on"));
+      }
+    </script>
+  </body>
+</html>
