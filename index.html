@@ -14,6 +14,7 @@
     <link rel="apple-touch-icon" href="assets/favicon-180.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="image" href="assets/bear.jpg" />
     <link
       href="https://fonts.googleapis.com/css2?family=Schoolbell&display=swap"
       rel="stylesheet"
@@ -108,7 +109,7 @@
         cursor: pointer;
         display: block;
         text-align: right;
-        font-family: "Schoolbell", system-ui, sans-serif;
+        font-family: var(--font-body);
         /* font-style: italic; */
         font-size: 22px;
         line-height: 1.1;
@@ -121,17 +122,8 @@
         color: oklch(0.3 0.012 265);
       }
       nav button[aria-current="true"] {
-        font-weight: 500;
         color: oklch(0.28 0.012 265);
       }
-
-      /* #divider {
-        width: 1px;
-        background: oklch(0.905 0.006 265);
-        flex-shrink: 0;
-        align-self: stretch;
-        min-height: 360px;
-      } */
 
       #content {
         width: 600px;
@@ -147,7 +139,6 @@
       }
       h1 {
         font-family: var(--font-body);
-        font-weight: 500;
         font-size: 19px;
         margin: 0 0 34px;
         color: #000;
@@ -159,15 +150,6 @@
       .about p:last-child {
         margin: 0;
       }
-
-      /* .word {
-        color: oklch(0.5 0.11 250);
-        text-decoration: underline;
-        text-decoration-color: oklch(0.6 0.1 250);
-        text-decoration-thickness: 1.5px;
-        text-underline-offset: 2.5px;
-        cursor: pointer;
-      } */
 
       .word {
         color: inherit;
@@ -284,9 +266,6 @@
           padding-top: 0;
           position: static;
         }
-        /* #divider {
-          display: none;
-        } */
         #content {
           max-width: 100%;
           font-size: 17px;
@@ -307,9 +286,8 @@
 
         <div id="content">
           <section class="about" data-section="about">
-            <!-- <h1>Henry Zhang</h1> -->
             <p>
-              Hi, I'm Henry! I'm currently a Rabi Fellow @ Columbia, studying
+              Hi, I'm Henry! I'm currently a Rabi Scholar @ Columbia, studying
               math and CS, and an MLE @ Triangle Analytics.
             </p>
             <p>
@@ -322,7 +300,7 @@
               You can learn more about me via my
               <a href="#" data-goto="projects">projects</a>,
               <a
-                href="https://linkedin.com/henryzhng"
+                href="https://linkedin.com/in/henryzhng"
                 target="_blank"
                 rel="noreferrer"
                 >LinkedIn</a
@@ -337,7 +315,6 @@
           </section>
 
           <section class="projects-section" data-section="projects" hidden>
-            <!-- <h1>Projects</h1> -->
             <div class="projects">
               <div class="project">
                 <div class="project-head">
@@ -359,7 +336,7 @@
                 <p>
                   Explaining how quantum neural networks in the expressive
                   (design) regime behave by characterizing their quantum Fisher
-                  information matricies.
+                  information matrices.
                 </p>
                 <div class="shot">
                   <img
@@ -446,7 +423,7 @@
         }),
       );
 
-      // restore the section from the URL on load, and follow back/forward
+      // restore the section from the URL on load
       const initial = location.hash.slice(1);
       if (names.has(initial)) show(initial);
       window.addEventListener("hashchange", () => {
@@ -500,9 +477,11 @@
         }
       });
 
-      // tap anywhere else to dismiss the popup on touch
+      // tap anywhere else to dismiss the popup
       if (!canHover) {
-        document.addEventListener("click", () => popup.classList.remove("on"));
+        const dismiss = () => popup.classList.remove("on");
+        document.addEventListener("click", dismiss);
+        document.addEventListener("touchstart", dismiss, { passive: true });
       }
     </script>
   </body>
